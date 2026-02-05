@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Events AI - Premium</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --neon-blue: #00c6ff;
+            --neon-purple: #bd34fe;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 198, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(189, 52, 254, 0.1) 0%, transparent 20%);
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            background: linear-gradient(to right, #00c6ff, #bd34fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 198, 255, 0.3);
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8892b0;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+      
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+     
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out forwards;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(0, 198, 255, 0.2);
+            border-color: rgba(0, 198, 255, 0.4);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-cover: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .category-tag {
+            background: linear-gradient(90deg, var(--neon-purple), #333399);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 10px;
+            line-height: 1.3;
+            color: white;
+        }
+
+        .card p {
+            color: #a8b2d1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--neon-blue);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+
+        .btn-glow {
+            display: block;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-glow:hover {
+            background: white;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+      
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: var(--neon-blue);
+            animation: spin 1s ease-in-out infinite;
+        }
+        .error-msg {
+            color: #ff4d4d;
+            margin-top: 20px;
+            display: none;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EVENTS <span style="color:white">MONITOR</span></h1>
+        <p class="subtitle">Real-time Intelligent Event Tracking System. by DhivyaBharathi</p>
+    </header>
+
+    <div class="loader-container" id="loader-container">
+        <div class="loader"></div>
+        <p style="margin-top: 15px; color: #8892b0;">Fetching live data...</p>
+    </div>
+    
+    <p id="error-message" class="error-msg" style="text-align: center;"></p>
+
+    <div class="container" id="event-container">
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <script>
+       
+        const SUPABASE_URL = "https://bmvjhdbqegyryryxivok.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_-mlNTuruDShnWzlUClyhBQ_98EI6tT2";
+
+       
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function fetchEvents() {
+            try {
+                console.log("Connecting to Supabase...");
+                
+               
+                const { data, error } = await supabaseClient
+                    .from('events')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                if (error) {
+                    throw error;
+                }
+
+                console.log("Data Received:", data);
+
+            
+                document.getElementById('loader-container').style.display = 'none';
+                const container = document.getElementById('event-container');
+
+                if (data.length === 0) {
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-message').innerText = "No events found in Database. Run Python script first.";
+                    return;
+                }
+
+             
+                data.forEach((event, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.animationDelay = `${index * 0.15}s`;
+
+                    const imgUrl = event.image_url ? event.image_url : "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80";
+                    const location = event.location || "Chennai";
+                    const date = event.event_date || "Upcoming"; 
+
+                    card.innerHTML = `
+                        <img src="${imgUrl}" class="card-img" alt="${event.name}" onerror="this.src='https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=800'">
+                        <div class="card-content">
+                            <span class="category-tag">${event.category || 'Event'}</span>
+                            <h3>${event.name}</h3>
+                            <p>${event.summary || 'No description available.'}</p>
+                            
+                            <div class="meta">
+                                <span><i class="far fa-calendar-alt"></i> ${date}</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${location}</span>
+                            </div>
+
+                            <a href="${event.source_link || '#'}" target="_blank" class="btn-glow">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+                VanillaTilt.init(document.querySelectorAll(".card"), {
+                    max: 10,
+                    speed: 400,
+                    glare: true,
+                    "max-glare": 0.2,
+                });
+
+            } catch (err) {
+                console.error("Error:", err);
+                document.getElementById('loader-container').style.display = 'none';
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.style.display = 'block';
+                errorDiv.innerText = "Error: " + err.message + ". Check your API Keys.";
+            }
+        }
+
+   
+        fetchEvents();
+    </script>
+</body>
+</html>
